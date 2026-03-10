@@ -1,32 +1,30 @@
 <?php
 
-$nome=$_POST['nome']??'';
-$cargo=$_POST['cargo']??'';
-$cidade=$_POST['cidade']??'';
-$telefone=$_POST['telefone']??'';
-$email=$_POST['email']??'';
-$linkedin=$_POST['linkedin']??'';
-$resumo=$_POST['resumo']??'';
+$name = $_POST['name'] ?? '';
+$title = $_POST['title'] ?? '';
+$email = $_POST['email'] ?? '';
+$phone = $_POST['phone'] ?? '';
+$city = $_POST['city'] ?? '';
+$linkedin = $_POST['linkedin'] ?? '';
+$summary = $_POST['summary'] ?? '';
 
-$skills=$_POST['skills']??[];
-$empresa=$_POST['empresa']??[];
-$cargoexp=$_POST['cargoexp']??[];
-$periodo=$_POST['periodo']??[];
+$empresa = $_POST['empresa'] ?? [];
+$cargo = $_POST['cargo'] ?? [];
+$periodo = $_POST['periodo'] ?? [];
 
-$faculdade=$_POST['faculdade']??[];
-$curso=$_POST['curso']??[];
-$periodoform=$_POST['periodoform']??[];
+$faculdade = $_POST['faculdade'] ?? [];
+$curso = $_POST['curso'] ?? [];
+$periodoform = $_POST['periodoform'] ?? [];
 
-$certificados=$_POST['certificados']??[];
+$certificacao = $_POST['certificacao'] ?? [];
 
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Currículo</title>
 
@@ -34,28 +32,20 @@ $certificados=$_POST['certificados']??[];
 
 <style>
 
-body{background:#FFF;font-size:12px;line-height:1.3;}
+body{
+font-size:12px;
+background:white;
+}
 
-.container{max-width:880px;}
+.container{
+max-width:900px;
+}
 
 .section-title{
 border-bottom:2px solid #007bff;
-padding-bottom:2px;
-margin-top:14px;
-margin-bottom:6px;
+margin-top:15px;
 font-weight:bold;
-font-size:14px;
 }
-
-.qrcode{
-position:fixed;
-bottom:20px;
-right:20px;
-text-align:center;
-font-size:11px;
-}
-
-.qrcode img{width:90px;}
 
 </style>
 
@@ -65,39 +55,29 @@ font-size:11px;
 
 <div class="container">
 
-<h1 class="text-center text-primary"><?=htmlspecialchars($nome)?></h1>
+<h1 class="text-center text-primary"><?=htmlspecialchars($name)?></h1>
 
-<h5 class="text-center"><?=htmlspecialchars($cargo)?></h5>
-
-<p class="text-center"><?=htmlspecialchars($cidade)?></p>
+<h5 class="text-center"><?=htmlspecialchars($title)?></h5>
 
 <p class="text-center">
 
-<strong>Telefone:</strong> <?=htmlspecialchars($telefone)?> |
-<strong>Email:</strong> <?=htmlspecialchars($email)?>
+<?=$city?> |
+<?=$phone?> |
+<?=$email?>
 
 </p>
 
 <p class="text-center">
 
-<strong>LinkedIn:</strong>
-<a href="<?=$linkedin?>" target="_blank"><?=$linkedin?></a>
+<a href="<?=$linkedin?>"><?=$linkedin?></a>
 
 </p>
 
-<div class="section-title">Resumo Profissional</div>
+<div class="section-title">Resumo</div>
 
-<p><?=nl2br(htmlspecialchars($resumo))?></p>
+<p><?=$summary?></p>
 
-<div class="section-title">Competências Técnicas</div>
-
-<ul>
-<?php foreach($skills as $s){ ?>
-<li><?=htmlspecialchars($s)?></li>
-<?php } ?>
-</ul>
-
-<div class="section-title">Experiência Profissional</div>
+<div class="section-title">Experiência</div>
 
 <ul>
 
@@ -105,9 +85,7 @@ font-size:11px;
 
 for($i=0;$i<count($empresa);$i++){
 
-echo "<li><strong>".htmlspecialchars($empresa[$i])."</strong><br>";
-
-echo htmlspecialchars($cargoexp[$i])." (".htmlspecialchars($periodo[$i]).")</li>";
+echo "<li><b>{$empresa[$i]}</b><br>{$cargo[$i]} ({$periodo[$i]})</li>";
 
 }
 
@@ -115,7 +93,7 @@ echo htmlspecialchars($cargoexp[$i])." (".htmlspecialchars($periodo[$i]).")</li>
 
 </ul>
 
-<div class="section-title">Formação Acadêmica</div>
+<div class="section-title">Formação</div>
 
 <ul>
 
@@ -123,9 +101,7 @@ echo htmlspecialchars($cargoexp[$i])." (".htmlspecialchars($periodo[$i]).")</li>
 
 for($i=0;$i<count($faculdade);$i++){
 
-echo "<li><strong>".htmlspecialchars($faculdade[$i])."</strong> – ";
-
-echo htmlspecialchars($curso[$i])." (".htmlspecialchars($periodoform[$i]).")</li>";
+echo "<li><b>{$faculdade[$i]}</b> - {$curso[$i]} ({$periodoform[$i]})</li>";
 
 }
 
@@ -137,21 +113,17 @@ echo htmlspecialchars($curso[$i])." (".htmlspecialchars($periodoform[$i]).")</li
 
 <ul>
 
-<?php foreach($certificados as $c){ ?>
+<?php
 
-<li><?=htmlspecialchars($c)?></li>
+foreach($certificacao as $c){
 
-<?php } ?>
+echo "<li>$c</li>";
+
+}
+
+?>
 
 </ul>
-
-</div>
-
-<div class="qrcode">
-
-LinkedIn<br>
-
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<?=urlencode($linkedin)?>">
 
 </div>
 
